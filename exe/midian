@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exe/midian-preprocessor | exe/midian-parser | exe/midian-organizer | exe/midian-shoehorn

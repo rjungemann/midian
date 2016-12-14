@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'midian'
+
+code = STDIN.read
+tree = Midian::Preprocessor::Parser.new.parse_with_debug(code)
+interpreter = Midian::Preprocessor::Interpreter.new(tree)
+context = Midian::Preprocessor::Context.new
+
+puts interpreter.render.result(context)

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'midian'
+
+organizer = Midian::Organizer.new(STDIN)
+io = organizer.organize
+
+puts io.string

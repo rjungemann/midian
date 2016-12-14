@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+puts STDIN
+  .read
+  .unpack('H*')
+  .first
+  .split('')
+  .each_slice(2)
+  .map { |n| n.join('') }
+  .join(' ')

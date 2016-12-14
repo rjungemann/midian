@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'midian'
+
+code = STDIN.read
+tree = Midian::Parser.new.parse_with_debug(code)
+
+$stderr.puts 'Generated parse tree:'.colorize(:light_blue)
+$stderr.print "\n"
+PP.pp(tree, $stderr)
+$stderr.print "\n"
+
+context = {
+  ppqn: 96,
+  track_ts: {},
+  track_name: nil,
+  track_mappings: {},
+  velocity: 100,
+  octave: 5,
+  tempo: 120,
+  duration: {
+    division: 4,
+    dots: 0
+  }
+}
+io = StringIO.new
+interpreter = Midian::Interpreter.new(io, tree, context)
+interpreter.setup
+interpreter.interpret
+interpreter.shutdown
+
+puts io.string
